@@ -1,17 +1,20 @@
-from django.shortcuts import render
+from django.views.generic import ListView
 
 from .forms import AddBookForm
 from .models import Catalog
 
 
-def home(request):
-    if request.method == "POST":
-        add_book_form = AddBookForm(data=request.POST)
-        if add_book_form.is_valid():
-            add_book_form.save()
-    books = Catalog.objects.all()
-    add_book_form = AddBookForm()
+class ВookCreateView(ListView):
+    """
+    Представление: создание материалов на сайте
+    """
+    model = Catalog
+    template_name = 'main.html'
+    context_object_name = 'books'
+    queryset = Catalog.objects.all()
 
-    return render(
-        request, "main.html", {"add_book_form": add_book_form, "books": books}
-    )
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Моя библиотека'
+        context['add_book_form'] = AddBookForm
+        return context

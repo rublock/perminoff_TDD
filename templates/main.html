@@ -8,27 +8,25 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <title>E-library Application</title>
+    <title>{{ title }}</title>
   </head>
   <body>
       <div class="container">
-        <h1>E-library Application &#128218;</h1>
+        <h1>Моя библиотека 📚</h1>
         <hr>
         <div class="row">
 
           <div class="col-md-6">
-        {% for book in books %}
+        {% for i in books %}
           <div class="card mb-4">
-            <div class="card-header">
-                {{ book.ISBN }}
-            </div>
+
             <div class="card-body">
-                <h5 class="card-title">{{ book.title }}</h5>
+                <h5 class="card-title">{{ i.title }}</h5>
                 <p class="card-text">
-                    <em>By:</em> {{ book.author }}
+                    <em>By:</em> {{ i.author }}
                     <br>
                     <br>
-                    <strong>Availability:</strong> {{ book.availability }}
+                    <strong>Read:</strong> {{ i.read }}
                   </p>
               </div>
           </div>
@@ -38,8 +36,8 @@
         {% endfor %}
         </div>
             <div class="col-md-6">
-
                 <form method="post">
+
                     {% csrf_token %}
 
                     {{ add_book_form.as_p }}
