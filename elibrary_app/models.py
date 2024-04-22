@@ -8,10 +8,8 @@ class Catalog(models.Model):
     )
 
     title = models.CharField(max_length=255)
-    ISBN = models.CharField(max_length=13)
     author = models.CharField(max_length=255)
-    price = models.DecimalField(max_digits=6, decimal_places=2)
-    availability = models.CharField(
+    read = models.CharField(
         max_length=5, choices=STATUS_CHOICES, default="false"
     )
 
